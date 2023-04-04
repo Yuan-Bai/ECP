@@ -23,10 +23,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         # 对父类ui的修改添加到此处
+        # 整体修改
         self.resize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT)
         self.setAttribute(Qt.WA_TranslucentBackground)  # 设置透明
         self.setWindowFlags(Qt.FramelessWindowHint)  # 设置无边框
-
+        # 组件修改
         self.setup_ui()
 
     def setup_ui(self):
@@ -37,9 +38,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         shadow.setColor(QColor(0, 0, 0))
         self.frame_top.setGraphicsEffect(shadow)
 
+        # 重设置frame子组件占比
+        self.verticalLayout.setStretch(1, F_RATIO)
+
+        # 重设frame_displayArea子组件占比占比
+        self.horizontalLayout_2.setStretch(0, FDA_RATIO)
+
         # 初始化“切换窗口”并隐藏
         self.widget_historyArea = HistoryWindow(self.frame_bady)
-        self.horizontalLayout_2.insertWidget(0, self.widget_historyArea, 63)
+        self.horizontalLayout_2.insertWidget(0, self.widget_historyArea, FDA_RATIO)
         self.widget_historyArea.hide()
 
         # 设置搜索框占位符
