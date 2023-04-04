@@ -1,0 +1,63 @@
+#centralwidget{
+	background-color:rgb(255,255,255);
+}
+
+/* 设置顶部区域 */
+#frame_top{
+    background-color:rgb(255,255,255);
+}
+
+/* 设置关闭按钮 */
+#toolButton_close{
+    border-image:url(app/static/icons/title/close.png);
+}
+#toolButton_close:hover{
+    border-image:url(app/static/icons/title/close_light.png);
+}
+
+/* 设置最小化按钮 */
+#toolButton_min{
+    border-image:url(app/static/icons/title/minimize.png);
+}
+#toolButton_min:hover{
+    border-image:url(app/static/icons/title/minimize_light.png);
+}
+
+/* 统一按钮风格 */
+QPushButton{
+	font:10pt "Microsoft YaHei UI";
+	border: none;
+}
+QPushButton:hover{
+	font:12pt "Microsoft YaHei UI";
+}
+
+QToolButton{
+	border:none;
+}
+
+/* 设置搜索框 */
+#frame_searchArea{
+	background-color:rgb(242,243,244);
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	border-radius:7px;
+}
+#frame_searchArea:hover{
+	background-color:rgb(255,255,255);
+	border-radius:7px;
+}
+
+#lineEdit_search{
+	background-color:rgb(242,243,244);
+	border-radius:7px;
+}
+#lineEdit_search:hover{
+	background-color:rgb(255,255,255);
+	border-radius:7px;
+}
+#lineEdit_search:focus{
+	background-color:rgb(229,231,233);
+	border-radius:7px;
+}
