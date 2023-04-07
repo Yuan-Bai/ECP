@@ -61,3 +61,66 @@ QToolButton{
 	background-color:rgb(229,231,233);
 	border-radius:7px;
 }
+
+/* 设置滚动条样式 */
+/*竖向滚动条*/
+
+QScrollBar:vertical
+{
+  width:8px;
+  background:rgba(0,0,0,0%);
+  margin:0px,0px,0px,0px;
+  padding-top:9px;
+  padding-bottom:9px;
+}
+/*滑块*/
+QScrollBar::handle:vertical
+{
+  width:8px;
+  /*background:rgba(0,0,0,25%);*/
+  background:#99A5BE;
+  border-radius:4px;
+  min-height:20;
+}
+/*滑块-鼠标悬浮*/
+QScrollBar::handle:vertical:hover
+{
+  width:8px;
+  background:rgba(0,0,0,50%);
+  border-radius:4px;
+  min-height:20;
+}
+/*下方端点*/
+QScrollBar::add-line:vertical
+{
+  height:9px;width:8px;
+  border-image:url(:/images/a/3.png);
+  subcontrol-position:bottom;
+}
+/*上方端点*/
+QScrollBar::sub-line:vertical
+{
+  height:9px;width:8px;
+  border-image:url(:/images/a/1.png);
+  subcontrol-position:top;
+}
+/*下方端点-鼠标悬浮*/
+QScrollBar::add-line:vertical:hover
+{
+  height:9px;width:8px;
+  border-image:url(:/images/a/4.png);
+  subcontrol-position:bottom;
+}
+/*上方端点-鼠标悬浮*/
+QScrollBar::sub-line:vertical:hover
+{
+  height:9px;width:8px;
+  border-image:url(:/images/a/2.png);
+  subcontrol-position:top;
+}
+/*滑块未到达区域*/
+QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical
+{
+  background:rgba(0,0,0,10%);
+  border-radius:4px;
+}

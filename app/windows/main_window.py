@@ -1,12 +1,15 @@
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QLineEdit, QMessageBox, QGraphicsDropShadowEffect, QFrame, \
-    QMainWindow
+import requests
+from PyQt5 import QtGui
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QPixmap
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QFrame, QMainWindow
 from app.settings import *
 from app.ui_py.main_ui import Ui_MainWindow
 from app.utils import AREA
+from app.windows.goods_frame import GoodsFrame
 from app.windows.history_window import HistoryWindow
 from app.windows.login_window import LoginWindow
+from app.api import *
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -17,7 +20,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.start_y = None
         self.widget_loginArea = None
         self.widget_historyArea = None
-        self.flag_area = 'HomePage'
+        self.flag_area = 'HomePage'  # 标记当前页面
+        self.now_row = 0
 
         # 调用父类方法创建ui
         self.setupUi(self)
@@ -41,8 +45,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 重设置frame子组件占比
         self.verticalLayout.setStretch(1, F_RATIO)
 
-        # 重设frame_displayArea子组件占比占比
-        self.horizontalLayout_2.setStretch(0, FDA_RATIO)
+        # 为滚动区域滚动条添加监听事件，以增加商品展示行数
+        self.scrollArea.verticalScrollBar().valueChanged.connect(self.handleBarValue)
+
+        # 添加轮播区域和商品
+        rotation = QFrame()
+        rotation.setObjectName('frame_rotation')
+        self.gridLayout.addWidget(rotation, 0, 0, ROTATION_ROW, ROTATION_COL)
+        self.addGoods()
 
         # 初始化“切换窗口”并隐藏
         self.widget_historyArea = HistoryWindow(self.frame_bady)
@@ -65,6 +75,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 设置首页按钮
         self.pushButton_homePage.clicked.connect(self.switch_homepage_window)
 
+    # todo 添加请求
+    def addGoods(self):
+        index = 0
+        for row in range(self.now_row, self.now_row+ROW):
+            for col in range(COL):
+                if row < ROTATION_ROW and col < ROTATION_COL:
+                    continue
+                frame = GoodsFrame()
+                frame.setObjectName('frame_goods_'+str(index))
+                # resp = requests.get(goods_image_api)
+                # resp1 = requests.get(resp.text)
+                # photo = QPixmap()
+                # photo.loadFromData(resp1.content, "JPG")
+                # frame.label.setPixmap(photo)
+                # frame.label.setScaledContents(True)
+                self.gridLayout.addWidget(frame, row, col, 1, 1)
+                index += 1
+        self.now_row += ROW
+
+    # -*- 监听事件函数开始 -*-
+    def handleBarValue(self, value):
+        if value == self.scrollArea.verticalScrollBar().maximum():
+            self.setCursor(QtGui.QCursor(Qt.WaitCursor))
+            self.addGoods()
+            self.setCursor(QtGui.QCursor(Qt.ArrowCursor))
+
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             super(MainWindow, self).mousePressEvent(event)
@@ -83,6 +119,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.move(self.x() + dis_x, self.y() + dis_y)
         except Exception:
             pass
+    # -*- 监听事件函数结束 -*-
 
     def switch_login_window(self):
         self.widget_loginArea = LoginWindow()
@@ -91,14 +128,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def switch_history_window(self):
         if self.flag_area != AREA.History:
             self.flag_area = AREA.History
-            self.frame_displayArea.hide()
+            self.scrollArea.hide()
             self.widget_historyArea.show()
 
     def switch_homepage_window(self):
         if self.flag_area != AREA.HomePage:
             self.flag_area = AREA.HomePage
             self.widget_historyArea.hide()
-            self.frame_displayArea.show()
+            self.scrollArea.show()
 
     def update(self) -> None:
         pass
