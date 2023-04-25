@@ -1,5 +1,5 @@
+import json
 import time
-from enum import Enum
 
 
 def read_file(file_name):
@@ -12,14 +12,9 @@ def write_file(file_name, data):
         return file.write(data)
 
 
-class AREA(Enum):
-    HomePage = 'HomePage'
-    History = 'History'
-    ShoppingCar = 'ShoppingCar'
-    UserCenter = 'UserCenter'
-    Login = 'Login'
-    Register = 'Register'
-    Business = 'Business'
+def read_jsonFile(file_name):
+    with open(file_name, 'r',  encoding='UTF-8') as file:
+        return json.load(file)
 
 
 class Timer:

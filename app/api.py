@@ -8,3 +8,6 @@ register_api = 'http://localhost:8081/ECP/register'
 random_goods_api = 'http://localhost:8081/ECP/randomGoods'
 # 成为商家的api
 become_business_api = 'http://localhost:8081/ECP/becomeBusiness'
+# 上传商品api
+upload_goods_api = 'http://localhost:8081/ECP/upLoadGoods'
+

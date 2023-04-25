@@ -1,69 +1,61 @@
 import json
-
+import logging
+from json import JSONDecodeError
 import requests
-from app.api import *
-from app.entity.user import User
+from requests.exceptions import HTTPError
 
 
-def getGoodsList(user):
-    cookie = user.getCookie()
-    params = {'cookie': cookie}
-    resp = requests.post(goods_image_api, params=params)
-    return resp.text
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s',
+    datefmt='%Y-%m-%dT%H:%M:%S')
 
 
-def login(user):
-    if user.is_login:
-        return
-    params = {
-        'name': user.name,
-        'pwd': user.pwd,
-    }
-    resp_json = None
-    try:
-        resp = requests.post(login_api, params=params, timeout=5)
-        resp_json = json.loads(resp.text)
-        if resp_json['is_login'] == 'fail':
-            return False
-        return resp_json['user']
-    except:
-        return False
+log = logger = logging
 
 
-def register(user):
-    if user.is_login:
-        return
-    params = {
-        'name': user.name,
-        'pwd': user.pwd,
-    }
-    resp = None
-    try:
-        resp = requests.post(register_api, params=params, timeout=5)
-    except:
-        return False
-    return resp.text
+class HttpRequest(object):
+    @staticmethod
+    def get_data(resp_json):
+        if resp_json.get('retCode', '404') != '200':
+            print(resp_json.get('message', 'connect failed'))
+            return None
+        else:
+            print(resp_json.get('message'))
+            return resp_json.get('data')
+
+    @staticmethod
+    def to_python(json_str):
+        try:
+            if json_str is None:
+                json_str = '{}'
+            resp_json = json.loads(json_str.text)
+        except JSONDecodeError as e:
+            log.error(f'JSONDecode error:\n{e}')
+        else:
+            return resp_json
+
+    @staticmethod
+    def to_json(obj):
+        return json.dumps(obj, indent=4, ensure_ascii=False)
+
+    @staticmethod
+    def request(method, url, max_retry: int = 0, params=None, data=None, json=None, headers=None, **kwargs):
+        for i in range(max_retry + 1):
+            try:
+                s = requests.Session()
+                response = s.request(method, url, params=params, data=data, json=json, headers=headers, **kwargs)
+            except HTTPError as e:
+                log.error(f'HTTP error:\n{e}')
+                log.error(f'The NO.{i + 1} request failed, retrying...')
+            except KeyError as e:
+                log.error(f'Wrong response:\n{e}')
+                log.error(f'The NO.{i + 1} request failed, retrying...')
+            except Exception as e:
+                log.error(f'Unknown error:\n{e}')
+                log.error(f'The NO.{i + 1} request failed, retrying...')
+            else:
+                return response
 
 
-def become_business(user):
-    if user.is_business:
-        return False
-    params = {
-        'name': user.name,
-        'pwd': user.pwd,
-    }
-    resp = None
-    try:
-        resp = requests.post(register_api, params=params, timeout=5)
-    except:
-        return False
-
-
-def get_random_goods():
-    resp = requests.post(random_goods_api)
-    resp_json = json.loads(resp.text)
-    return resp_json
-
-
-if __name__ == '__main__':
-    get_random_goods()
+req = HttpRequest()
