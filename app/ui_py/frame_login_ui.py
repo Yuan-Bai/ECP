@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'app/static/ui/frame_register.ui'
+# Form implementation generated from reading ui file 'app/static/ui/frame_login.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -14,11 +14,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Frame(object):
     def setupUi(self, Frame):
         Frame.setObjectName("Frame")
-        Frame.resize(235, 295)
-        Frame.setStyleSheet("")
+        Frame.resize(230, 287)
         self.verticalLayout = QtWidgets.QVBoxLayout(Frame)
         self.verticalLayout.setObjectName("verticalLayout")
-        spacerItem = QtWidgets.QSpacerItem(20, 38, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(20, 35, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.frame_2 = QtWidgets.QFrame(Frame)
         self.frame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -55,15 +54,10 @@ class Ui_Frame(object):
         self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_4.setObjectName("frame_4")
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.frame_4)
-        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_7.setSpacing(0)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.label_9 = QtWidgets.QLabel(self.frame_4)
-        self.label_9.setObjectName("label_9")
-        self.horizontalLayout_7.addWidget(self.label_9)
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.frame_4)
-        self.lineEdit_3.setObjectName("lineEdit_3")
-        self.horizontalLayout_7.addWidget(self.lineEdit_3)
+        self.pushButton_4 = QtWidgets.QPushButton(self.frame_4)
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.horizontalLayout_7.addWidget(self.pushButton_4, 0, QtCore.Qt.AlignRight)
         self.verticalLayout.addWidget(self.frame_4)
         self.frame_5 = QtWidgets.QFrame(Frame)
         self.frame_5.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -71,14 +65,14 @@ class Ui_Frame(object):
         self.frame_5.setObjectName("frame_5")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_5)
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.pushButton_register = QtWidgets.QPushButton(self.frame_5)
-        self.pushButton_register.setObjectName("pushButton_register")
-        self.horizontalLayout_6.addWidget(self.pushButton_register)
-        self.pushButton_toLogin = QtWidgets.QPushButton(self.frame_5)
-        self.pushButton_toLogin.setObjectName("pushButton_toLogin")
-        self.horizontalLayout_6.addWidget(self.pushButton_toLogin)
+        self.pushButton_toRegister = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_toRegister.setObjectName("pushButton_toRegister")
+        self.horizontalLayout_6.addWidget(self.pushButton_toRegister)
+        self.pushButton_login = QtWidgets.QPushButton(self.frame_5)
+        self.pushButton_login.setObjectName("pushButton_login")
+        self.horizontalLayout_6.addWidget(self.pushButton_login)
         self.verticalLayout.addWidget(self.frame_5)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 38, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 35, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
         self.verticalLayout.setStretch(0, 1)
         self.verticalLayout.setStretch(1, 1)
@@ -97,7 +91,6 @@ class Ui_Frame(object):
         self.lineEdit.setPlaceholderText(_translate("Frame", "用户名"))
         self.label_8.setText(_translate("Frame", "icon"))
         self.lineEdit_2.setPlaceholderText(_translate("Frame", "密码"))
-        self.label_9.setText(_translate("Frame", "icon"))
-        self.lineEdit_3.setPlaceholderText(_translate("Frame", "确认密码"))
-        self.pushButton_register.setText(_translate("Frame", "注册"))
-        self.pushButton_toLogin.setText(_translate("Frame", "返回"))
+        self.pushButton_4.setText(_translate("Frame", "忘记密码"))
+        self.pushButton_toRegister.setText(_translate("Frame", "注册"))
+        self.pushButton_login.setText(_translate("Frame", "登录"))

@@ -24,7 +24,7 @@ class Ui_Form(object):
         self.frame_2.setObjectName("frame_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label = QtWidgets.QLabel(self.frame_2)
+        self.label = MyLabel(self.frame_2)
         self.label.setObjectName("label")
         self.verticalLayout_2.addWidget(self.label)
         self.frame = QtWidgets.QFrame(self.frame_2)
