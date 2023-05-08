@@ -1,19 +1,22 @@
+import requests
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFrame
+from app.entity.goods import get_goods_list
 from app.settings import COL, ROW
 from app.ui_py.homepage_ui import Ui_Frame
 from app.windows.frame import MainDisplayFrame, GoodsFrame
 
 
 class HomePageWindow(QFrame, Ui_Frame):
-    def __init__(self, user, parent=None):
+    def __init__(self, switch, parent=None):
         super().__init__(parent)
         # 初始化必要变量
         self.start_x = None
         self.start_y = None
         self.now_row = 1
-        self.user = user
+        self.switch = switch
 
         # 调用父类方法创建ui
         self.setupUi(self)
@@ -33,16 +36,17 @@ class HomePageWindow(QFrame, Ui_Frame):
     # todo 添加请求
     def addGoods(self):
         index = 0
+        goods_list = get_goods_list()
         for row in range(self.now_row, self.now_row+ROW):
             for col in range(COL):
-                frame = GoodsFrame()
-                frame.setObjectName('frame_goods_'+str(index))
-                # resp = requests.get(goods_image_api)
-                # resp1 = requests.get(resp.text)
-                # photo = QPixmap()
-                # photo.loadFromData(resp1.content, "JPG")
-                # frame.label.setPixmap(photo)
-                # frame.label.setScaledContents(True)
+                frame = GoodsFrame(self.switch)
+                # frame.setObjectName('frame_goods_'+str(index))
+                goods = goods_list[index]
+                resp = requests.get(goods.image_url)
+                photo = QPixmap()
+                photo.loadFromData(resp.content, "JPG")
+                frame.label.setPixmap(photo)
+                frame.label.setScaledContents(True)
                 self.gridLayout.addWidget(frame, row, col, 1, 1)
                 index += 1
         self.now_row += ROW

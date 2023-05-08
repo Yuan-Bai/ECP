@@ -1,17 +1,17 @@
 from PyQt5.QtWidgets import QWidget, QFileDialog
 
 from app.api import upload_goods_api
+from app.entity.user import user
 from app.routes import req
 from app.ui_py.business_ui import Ui_Form
 
 
 class BusinessWidow(QWidget, Ui_Form):
-    def __init__(self, user, switch, parent=None):
+    def __init__(self, switch, parent=None):
         super().__init__(parent)
         # 初始化必要变量
         self.start_x = None
         self.start_y = None
-        self.user = user
         self.switch = switch
 
         # 调用父类方法创建ui
@@ -26,7 +26,7 @@ class BusinessWidow(QWidget, Ui_Form):
     def upload_goods(self):
         params = {
             'goods_name': self.lineEdit.text(),
-            'business_id': self.user.business.id,
+            'business_id': user.business.id,
             'goods_price': self.lineEdit_2.text(),
             'goods_amount': self.lineEdit_3.text(),
             'goods_introduce': self.lineEdit_4.text(),

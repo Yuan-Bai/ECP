@@ -4,6 +4,7 @@ from json import JSONDecodeError
 import requests
 from requests.exceptions import HTTPError
 
+from app.api import random_goods_api
 
 logging.basicConfig(
     level=logging.INFO,
@@ -28,7 +29,7 @@ class HttpRequest(object):
     def to_python(json_str):
         try:
             if json_str is None:
-                json_str = '{}'
+                return json.loads('{}')
             resp_json = json.loads(json_str.text)
         except JSONDecodeError as e:
             log.error(f'JSONDecode error:\n{e}')
@@ -40,7 +41,7 @@ class HttpRequest(object):
         return json.dumps(obj, indent=4, ensure_ascii=False)
 
     @staticmethod
-    def request(method, url, max_retry: int = 0, params=None, data=None, json=None, headers=None, **kwargs):
+    def request(method, url, max_retry: int = 2, params=None, data=None, json=None, headers=None, **kwargs):
         for i in range(max_retry + 1):
             try:
                 s = requests.Session()

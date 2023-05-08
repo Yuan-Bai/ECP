@@ -124,7 +124,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="MyLabel" name="label">
            <property name="text">
             <string/>
            </property>
@@ -210,6 +210,13 @@
   <zorder>verticalSpacer</zorder>
   <zorder>verticalSpacer_2</zorder>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">app.components.my_label.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

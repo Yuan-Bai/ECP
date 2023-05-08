@@ -1,3 +1,5 @@
 pyuic5 -o app/ui_py/verification_ui.py app/static/ui/verification.ui
 pyuic5 -o app/ui_py/frame_login_ui.py app/static/ui/frame_login.ui
 pyuic5 -o app/ui_py/business_ui.py app/static/ui/business.ui
+pyuic5 -o app/ui_py/frame_goods_ui.py app/static/ui/frame_goods.ui
+pyuic5 -o app/ui_py/goods_buy.py app/static/ui/goods_buy.ui
