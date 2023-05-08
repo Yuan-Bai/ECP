@@ -87,6 +87,4 @@ class Business:
         self.credit = kwargs['credit'] if kwargs.__contains__("credit") else None
 
 
-if __name__ == '__main__':
-    user = User()
-    user.auto_login()
+user = User()

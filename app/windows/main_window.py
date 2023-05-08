@@ -6,7 +6,7 @@ from app.switch import Switch
 from app.ui_py.main_ui import Ui_MainWindow
 from app.windows.history_window import HistoryWindow
 from app.windows.homepage_window import HomePageWindow
-from app.entity.user import User
+from app.entity.user import user
 from app.windows.verification_window import VerificationWindow
 
 
@@ -16,16 +16,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 初始化必要变量
         self.start_x = None
         self.start_y = None
-        self.scrollArea = None
-        self.widget_loginArea = None
-        self.widget_historyArea = None
-        self.widget_registerArea = None
-        self.widget_userCenter = None
-        self.widget_business = None
-        self.widget_becomeBusiness = None
 
-        self.user = User()  # 有无更优雅的写法？待定
-        self.user.auto_login()  # 自动登录
+        user.auto_login()  # 自动登录
 
         # 调用父类方法创建ui
         self.setupUi(self)
@@ -53,7 +45,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.verticalLayout.setStretch(1, F_RATIO)
 
         # 跳转到主页
-        self.switch.switch_windows(HomePageWindow, self.user)
+        self.switch.switch_windows(HomePageWindow, self.switch)
 
         # 设置搜索框占位符
         self.lineEdit_search.setPlaceholderText('搜索')
@@ -63,14 +55,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.toolButton_min.clicked.connect(self.showMinimized)
 
         # 设置用户中心按钮
-        self.pushButton_userCenter.clicked.connect(lambda: self.switch.switch_windows(VerificationWindow,
-                                                                                      self.user, self.switch))
+        self.pushButton_userCenter.clicked.connect(lambda: self.switch.switch_windows(VerificationWindow, self.switch))
 
         # 设置历史记录按钮
-        self.pushButton_history.clicked.connect(lambda: self.switch.switch_windows(HistoryWindow, self.user))
+        self.pushButton_history.clicked.connect(lambda: self.switch.switch_windows(HistoryWindow))
 
         # 设置首页按钮
-        self.pushButton_homePage.clicked.connect(lambda: self.switch.switch_windows(HomePageWindow, self.user))
+        self.pushButton_homePage.clicked.connect(lambda: self.switch.switch_windows(HomePageWindow, self.switch))
 
     # -*- 监听事件函数开始 -*-
     def mousePressEvent(self, event):

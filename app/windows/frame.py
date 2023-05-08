@@ -7,18 +7,27 @@ from app.ui_py.frame_goods_ui import Ui_Frame as Fgu
 from app.ui_py.frame_maindisplay_ui import Ui_Frame as Fmu
 from app.ui_py.frame_register_ui import Ui_Frame as Fru
 from app.ui_py.frame_login_ui import Ui_Frame as Flu
+from app.windows.goods_buy_window import GoodsBuyWindow
 from app.windows.user_center_window import UserCenterWindow
 
 
 class GoodsFrame(QFrame, Fgu):
-    def __init__(self, parent=None):
+    def __init__(self, switch, parent=None):
         super().__init__(parent)
         # 初始化必要变量
         self.start_x = None
         self.start_y = None
+        self.switch = switch
 
         # 调用父类方法创建ui
         self.setupUi(self)
+        self.setup_ui()
+
+    def setup_ui(self):
+        self.label.clicked.connect(self.to_buy)
+
+    def to_buy(self):
+        self.switch.switch_windows(GoodsBuyWindow, self.switch)
 
 
 class MainDisplayFrame(QFrame, Fmu):

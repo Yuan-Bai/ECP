@@ -45,7 +45,7 @@ class Ui_Frame(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.label = QtWidgets.QLabel(self.frame_images)
+        self.label = MyLabel(self.frame_images)
         self.label.setText("")
         self.label.setObjectName("label")
         self.horizontalLayout_2.addWidget(self.label)
@@ -93,3 +93,4 @@ class Ui_Frame(object):
         Frame.setWindowTitle(_translate("Frame", "Frame"))
         self.label_name.setText(_translate("Frame", "name"))
         self.label_price.setText(_translate("Frame", "price"))
+from app.components.my_label import MyLabel

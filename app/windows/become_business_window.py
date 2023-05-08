@@ -5,12 +5,12 @@ from app.ui_py.become_business_ui import Ui_Form
 from app.routes import req
 from app.api import become_business_api
 from PyQt5.QtWidgets import QFileDialog
-
+from app.entity.user import user
 from app.windows.business_window import BusinessWidow
 
 
 class BecomeBusinessWindow(QWidget, Ui_Form):
-    def __init__(self, user, switch, parent=None):
+    def __init__(self, switch, parent=None):
         super().__init__(parent)
         # 初始化必要变量
         self.start_x = None
@@ -18,7 +18,6 @@ class BecomeBusinessWindow(QWidget, Ui_Form):
         if user.is_business:
             switch.switch_windows(BusinessWidow, user, switch)
             return
-        self.user = user
         self.switch = switch
 
         # 调用父类方法创建ui
@@ -26,15 +25,14 @@ class BecomeBusinessWindow(QWidget, Ui_Form):
         self.setup_ui()
 
     def setup_ui(self):
-        self.pushButton_2.clicked.connect(lambda: self.switch.switch_windows(BecomeBusinessWindow,
-                                                                             self.user, self.switch))
+        self.pushButton_2.clicked.connect(lambda: self.switch.switch_windows(BecomeBusinessWindow, user, self.switch))
         self.pushButton.clicked.connect(self.become_business)
         self.pushButton_chooseFile.clicked.connect(self.choose_file)
 
     def become_business(self):
         params = {
-            'user_name': self.user.name,
-            'user_pwd': self.user.pwd,
+            'user_name': user.name,
+            'user_pwd': user.pwd,
             'business_name': self.lineEdit_businessName.text(),
             'business_address': self.lineEdit_businessAddress.text(),
             'business_phone': self.lineEdit_business_phone.text(),
