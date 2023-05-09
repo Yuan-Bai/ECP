@@ -1,4 +1,4 @@
-from app.api import goods_image_api, random_goods_api
+from app.api import random_goods_api, get_business_info
 from app.routes import req
 from app.settings import ROW, COL
 
@@ -6,6 +6,7 @@ from app.settings import ROW, COL
 class Goods:
     def __init__(self, **kwargs):
         self.id = kwargs['id'] if kwargs.__contains__("id") else None
+        self.business_id = kwargs['business_id'] if kwargs.__contains__("business_id") else None
         self.name = kwargs['name'] if kwargs.__contains__("name") else None
         self.price = kwargs['price'] if kwargs.__contains__("price") else None
         self.introduce = kwargs['introduce'] if kwargs.__contains__("introduce") else None
@@ -18,8 +19,20 @@ class Goods:
     def get_review(self):
         pass
 
+    # 获取商店信息，属于请求
+    def get_business_info(self):
+        params = {
+            'business_id': self.business_id
+        }
+        data = req.get_data(req.to_python(req.request('post', get_business_info, params=params)))
+        return data
+
+    def upload_indent(self):
+        pass
+
     def update_by_json(self, goods_json):
         self.id = goods_json.get('id')
+        self.business_id = goods_json.get('business_id')
         self.name = goods_json.get('goods_name')
         self.price = goods_json.get('price')
         self.introduce = goods_json.get('introduce')

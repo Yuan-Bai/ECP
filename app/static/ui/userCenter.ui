@@ -672,7 +672,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_28">
+             <widget class="MyLabel" name="label_28">
               <property name="text">
                <string>客服</string>
               </property>

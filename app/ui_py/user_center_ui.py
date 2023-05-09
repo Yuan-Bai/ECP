@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'app/static/ui/user_center.ui'
+# Form implementation generated from reading ui file 'app/static/ui/userCenter.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -329,7 +329,7 @@ class Ui_Form(object):
         self.label_27 = QtWidgets.QLabel(self.frame_9)
         self.label_27.setObjectName("label_27")
         self.verticalLayout_18.addWidget(self.label_27)
-        self.label_28 = QtWidgets.QLabel(self.frame_9)
+        self.label_28 = MyLabel(self.frame_9)
         self.label_28.setObjectName("label_28")
         self.verticalLayout_18.addWidget(self.label_28)
         self.verticalLayout_3.addWidget(self.frame_9)

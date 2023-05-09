@@ -2,4 +2,11 @@ pyuic5 -o app/ui_py/verification_ui.py app/static/ui/verification.ui
 pyuic5 -o app/ui_py/frame_login_ui.py app/static/ui/frame_login.ui
 pyuic5 -o app/ui_py/business_ui.py app/static/ui/business.ui
 pyuic5 -o app/ui_py/frame_goods_ui.py app/static/ui/frame_goods.ui
-pyuic5 -o app/ui_py/goods_buy.py app/static/ui/goods_buy.ui
+pyuic5 -o app/ui_py/goods_buy_ui.py app/static/ui/goods_buy.ui
+pyuic5 -o app/ui_py/frame_review_ui.py app/static/ui/review.ui
+pyuic5 -o app/ui_py/upForm_ui.py app/static/ui/upForm.ui
+pyuic5 -o app/ui_py/user_center_ui.py app/static/ui/userCenter.ui
+pyuic5 -o app/ui_py/message_ui.py app/static/ui/message.ui
+pyuic5 -o app/ui_py/frame_chat_ui.py app/static/ui/chat.ui
+pyuic5 -o app/ui_py/frame_mybubble_ui.py app/static/ui/mybubble.ui
+pyuic5 -o app/ui_py/frame_othersbubble_ui.py app/static/ui/othersbubble.ui

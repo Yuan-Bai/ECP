@@ -39,9 +39,8 @@ class HomePageWindow(QFrame, Ui_Frame):
         goods_list = get_goods_list()
         for row in range(self.now_row, self.now_row+ROW):
             for col in range(COL):
-                frame = GoodsFrame(self.switch)
-                # frame.setObjectName('frame_goods_'+str(index))
                 goods = goods_list[index]
+                frame = GoodsFrame(goods, self.switch)
                 resp = requests.get(goods.image_url)
                 photo = QPixmap()
                 photo.loadFromData(resp.content, "JPG")

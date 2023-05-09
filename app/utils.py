@@ -1,5 +1,7 @@
 import json
 import time
+from PIL import Image
+import pillow_avif
 
 
 def read_file(file_name):
@@ -15,6 +17,11 @@ def write_file(file_name, data):
 def read_jsonFile(file_name):
     with open(file_name, 'r',  encoding='UTF-8') as file:
         return json.load(file)
+
+
+def avif_to_jpg(AVIFfilename):
+    AVIFimg = Image.open(AVIFfilename)
+    AVIFimg.save(AVIFfilename.replace("avif", 'jpg'), 'JPEG')
 
 
 class Timer:
@@ -38,3 +45,15 @@ class Timer:
             if self.func and self.active:
                 self.func()
             self.deactivate()
+
+
+if __name__ == '__main__':
+    import os
+
+    file = r'C:/Users/29946/Desktop/temp/'
+    for root, dirs, files in os.walk(file):
+        for file in files:
+            if file.__contains__('.avif'):
+                avif_to_jpg(root+file)
+                os.remove(root+file)
+
