@@ -49,6 +49,14 @@ class User:
     def get_business_info(self):
         pass
 
+    @staticmethod
+    def submit_indent(self, params):
+        resp = req.get_data(req.to_python(req.request('post', get_business_info, params=params)))
+        if resp.get('retCode') != '200':
+            return True
+        else:
+            return False
+
     def update_by_json(self, user_json):
         if user_json is None:
             return
@@ -85,6 +93,18 @@ class Business:
         self.name = kwargs['name'] if kwargs.__contains__("name") else None
         self.id = kwargs['id'] if kwargs.__contains__("id") else None
         self.credit = kwargs['credit'] if kwargs.__contains__("credit") else None
+        self.introduce = kwargs['introduce'] if kwargs.__contains__("introduce") else None
+
+    def update_by_json(self, business_json):
+        self.address = business_json.get('address')
+        self.create_time = business_json.get('create_time')
+        self.credit = business_json.get('credit')
+        self.id = business_json.get('id')
+        self.image_url = business_json.get('image_url')
+        self.name = business_json.get('name')
+        self.phone = business_json.get('phone')
+        self.user_id = business_json.get('user_id')
+        self.introduce = business_json.get('introduce')
 
 
 user = User()

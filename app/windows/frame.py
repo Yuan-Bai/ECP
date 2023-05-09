@@ -7,17 +7,19 @@ from app.ui_py.frame_goods_ui import Ui_Frame as Fgu
 from app.ui_py.frame_maindisplay_ui import Ui_Frame as Fmu
 from app.ui_py.frame_register_ui import Ui_Frame as Fru
 from app.ui_py.frame_login_ui import Ui_Frame as Flu
-from app.windows.goods_buy_window import GoodsBuyWindow
-from app.windows.user_center_window import UserCenterWindow
+from app.ui_py.frame_review_ui import Ui_Frame as Frvu
+from app.ui_py.frame_chat_ui import Ui_Frame as Fcu
+from app.ui_py.frame_mybubble_ui import Ui_Frame as Fmbu
 
 
 class GoodsFrame(QFrame, Fgu):
-    def __init__(self, switch, parent=None):
+    def __init__(self, goods, switch, parent=None):
         super().__init__(parent)
         # 初始化必要变量
         self.start_x = None
         self.start_y = None
         self.switch = switch
+        self.goods = goods
 
         # 调用父类方法创建ui
         self.setupUi(self)
@@ -27,7 +29,8 @@ class GoodsFrame(QFrame, Fgu):
         self.label.clicked.connect(self.to_buy)
 
     def to_buy(self):
-        self.switch.switch_windows(GoodsBuyWindow, self.switch)
+        from app.windows.goods_buy_window import GoodsBuyWindow
+        self.switch.switch_windows(GoodsBuyWindow, self.goods, self.switch)
 
 
 class MainDisplayFrame(QFrame, Fmu):
@@ -107,6 +110,54 @@ class LoginFrame(QFrame, Flu):
         self.user.update_by_json(data)
         if self.user.is_login:
             # 调用父类属性切换窗口
+            from app.windows.user_center_window import UserCenterWindow
             self.switch.switch_windows(UserCenterWindow, self.user, self.switch)
         self.setCursor(QtGui.QCursor(Qt.ArrowCursor))
 
+
+class ReviewFrame(QFrame, Frvu):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # 初始化必要变量
+        self.start_x = None
+        self.start_y = None
+        # self.switch = switch
+
+        # 调用父类方法创建ui
+        self.setupUi(self)
+        # 修改ui
+        # self.setup_ui()
+
+
+class ChatFrame(QFrame, Fcu):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # 初始化必要变量
+        self.start_x = None
+        self.start_y = None
+        # self.switch = switch
+
+        # 调用父类方法创建ui
+        self.setupUi(self)
+        # 修改ui
+        self.setup_ui()
+
+    def setup_ui(self):
+        self.textEdit.entered.connect(self.create_bubble)
+
+    def create_bubble(self):
+        self.verticalLayout_2.addWidget(MyBubbleFrame())
+
+
+class MyBubbleFrame(QFrame, Fmbu):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # 初始化必要变量
+        self.start_x = None
+        self.start_y = None
+        # self.switch = switch
+
+        # 调用父类方法创建ui
+        self.setupUi(self)
+        # 修改ui
+        # self.setup_ui()
