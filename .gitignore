@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# 本地凭据/会话（自动登录 cookie 等，禁止提交）
+app/cookie/
+
+# IDE
+.idea/
+.vscode/
+
+# 构建产物
+build/
+dist/
